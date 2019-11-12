@@ -1,0 +1,77 @@
+<form [formGroup]="service.form" class="normal-form">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key" />
+
+        <mat-form-field>
+          <input
+            formControlName="firstName"
+            matInput
+            placeholder="First name*"
+          />
+          <mat-error>This Field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="lastName" matInput placeholder="Last name*" />
+          <mat-error>This Field is mandatory</mat-error>
+        </mat-form-field>
+        <h4>How many miles can you run</h4>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="5" min="1" max="30"></mat-slider>
+
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div class="add-bottom-padding">
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="1">Male</mat-radio-button>
+            <mat-radio-button value="2">Female</mat-radio-button>
+            <mat-radio-button value="3">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="myControl"
+            placeholder="AutoComplete to chose building name"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Date Of Birth"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="button-row">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
